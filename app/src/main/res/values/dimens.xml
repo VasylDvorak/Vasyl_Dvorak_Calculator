@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="default_padding">10</dimen>
+    <dimen name="result_size">26sp</dimen>
+    <dimen name="image_size_landscape">750dp</dimen>
+    <dimen name="Grid_padding">10dp</dimen>
+    <dimen name="text_padding">10dp</dimen>
+    <dimen name="text_width">377dp</dimen>
+    <dimen name="text_width_2">469dp</dimen>
+    <dimen name="radio_button_width">104dp</dimen>
+</resources>
