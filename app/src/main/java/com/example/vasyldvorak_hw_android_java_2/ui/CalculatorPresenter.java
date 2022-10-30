@@ -1,23 +1,17 @@
 package com.example.vasyldvorak_hw_android_java_2.ui;
 
-
 import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.example.vasyldvorak_hw_android_java_2.model.Calculator;
-import com.example.vasyldvorak_hw_android_java_2.model.CalculatorImpl;
 import com.example.vasyldvorak_hw_android_java_2.model.Operator;
 
-import java.io.Serializable;
 import java.text.DecimalFormat;
-
 
 public class CalculatorPresenter implements Parcelable {
 
-
     public DecimalFormat formater = new DecimalFormat("#.##");
     public CalculatorView view;
-
     public Calculator calculator;
     public float argOne;
     public float argTwo;
@@ -29,10 +23,8 @@ public class CalculatorPresenter implements Parcelable {
 
     public CalculatorPresenter(CalculatorView view, Calculator calculator) {
         this.view = view;
-
         this.calculator = calculator;
     }
-
 
     protected CalculatorPresenter(Parcel in) {
         res = in.readString();
@@ -50,8 +42,6 @@ public class CalculatorPresenter implements Parcelable {
             selectedOperator = Operator.MULT;
         if (d == 4)
             selectedOperator = Operator.DIV;
-
-
     }
 
     public String get_res() {
@@ -72,8 +62,6 @@ public class CalculatorPresenter implements Parcelable {
 
     public void onDigitPressed(int digit) {
         int sign;
-
-
         if (next) {
             sign = (argOne == 0) ? 1 : (int) Math.signum(argOne);
             if (dot) {
@@ -83,8 +71,6 @@ public class CalculatorPresenter implements Parcelable {
                 argOne = Dot_funct(argOne, digit);
             res = String.valueOf(argOne);
             view.showResult(res);
-
-
         } else {
             sign = (argTwo == 0) ? 1 : (int) Math.signum(argTwo);
             if (dot)
@@ -93,10 +79,7 @@ public class CalculatorPresenter implements Parcelable {
                 argTwo = Dot_funct(argTwo, digit);
             res = String.valueOf(argTwo);
             view.showResult(res);
-
         }
-
-
     }
 
     public void onOperatorPressed(Operator operator) {
@@ -104,15 +87,11 @@ public class CalculatorPresenter implements Parcelable {
         next = false;
         dot = true;
         dotn = true;
-
-
     }
 
     public void onDotPressed() {
 
         dot = false;
-
-
     }
 
 
@@ -126,19 +105,15 @@ public class CalculatorPresenter implements Parcelable {
             res = String.valueOf(argTwo);
             view.showResult(res);
         }
-
     }
 
     public void onDelPressed() {
-
         if (next) {
-
             String first_argument = argOne - (int) argOne != 0 ? String.valueOf(argOne) : String.valueOf((int) argOne);
             if (argOne - (int) argOne == 0) {
                 dot = true;
                 dotn = true;
             }
-
             if (!(first_argument == null || first_argument.length() == 0 || first_argument.equals("0") || first_argument.equals(""))) {
                 first_argument = first_argument.substring(0, first_argument.length() - 1);
 
@@ -159,7 +134,6 @@ public class CalculatorPresenter implements Parcelable {
             }
             if (!(second_argument == null || second_argument.length() == 0 || second_argument.equals("0") || second_argument.equals("-") || second_argument.equals(""))) {
                 second_argument = second_argument.substring(0, second_argument.length() - 1);
-
             } else {
                 second_argument = "0";
             }
@@ -170,15 +144,11 @@ public class CalculatorPresenter implements Parcelable {
             res = String.valueOf(argTwo);
             view.showResult(res);
         }
-
-
     }
 
     public void onEqualPressed() {
         if (selectedOperator != null) {
             argOne = calculator.perform(argOne, argTwo, selectedOperator);
-
-
         }
         argTwo = 0f;
         String str;
@@ -194,7 +164,6 @@ public class CalculatorPresenter implements Parcelable {
             str = String.valueOf(argOne);
         res = str;
         view.showResult(str);
-
     }
 
     float Dot_funct(float fdigit, int digit4) {
@@ -233,7 +202,6 @@ public class CalculatorPresenter implements Parcelable {
         dot = true;
         dotn = true;
         selectedOperator = null;
-
     }
 
 
@@ -251,15 +219,18 @@ public class CalculatorPresenter implements Parcelable {
         parcel.writeByte((byte) (dot ? 1 : 0));
         parcel.writeByte((byte) (dotn ? 1 : 0));
         parcel.writeByte((byte) (next ? 1 : 0));
-
-        if (selectedOperator.equals(Operator.ADD))
-            n = 1;
-        if (selectedOperator.equals(Operator.SUB))
-            n = 2;
-        if (selectedOperator.equals(Operator.MULT))
-            n = 3;
-        if (selectedOperator.equals(Operator.DIV))
-            n = 4;
-        parcel.writeInt(n);
+        if (selectedOperator != null) {
+            if (selectedOperator.equals(Operator.ADD))
+                n = 1;
+            if (selectedOperator.equals(Operator.SUB))
+                n = 2;
+            if (selectedOperator.equals(Operator.MULT))
+                n = 3;
+            if (selectedOperator.equals(Operator.DIV))
+                n = 4;
+            parcel.writeInt(n);
+        } else {
+            parcel.writeInt(1);
+        }
     }
 }
