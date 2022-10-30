@@ -15,17 +15,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Txt = findViewById(R.id.text);
-        Txt.setText("Передаём число "+ String.valueOf(arg));
-findViewById(R.id.launch).setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View view) {
-
-        Intent intent= new Intent(Intent.ACTION_VIEW, Uri.parse("vasyl://calculator"));
-        intent.putExtra("first_argument", arg);
-        startActivity(intent);
-
-    }
-});
+       
     }
 }
