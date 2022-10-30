@@ -19,9 +19,8 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:textSize">15dp</item>
         <item name="android:textStyle">bold|italic</item>
-        <item name="android:fontFamily">serif</item>
+        <item name="android:fontFamily">@font/ljk_cinzel_regular9</item>
     </style>
-
 
     <style name="MyStyle" parent="Theme.MaterialComponents.Light">
         <item name="colorPrimary">#C50AE6</item>
@@ -35,7 +34,6 @@
         <item name="colorAccent">@color/color_3</item>
     </style>
 
-
     <style name="AppThemeLight" parent="Theme.MaterialComponents.Light">
         <item name="colorPrimary">@color/design_default_color_primary_dark</item>
         <item name="colorPrimaryDark">@color/color_1</item>
@@ -48,12 +46,22 @@
         <item name="android:textColor">@color/text_color</item>
     </style>
 
-
     <style name="RadioStyle">
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_gravity">end|bottom</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:textSize">40sp</item>
+        <item name="android:layout_gravity">left</item>
         <item name="android:buttonTint">@color/color_2</item>
         <item name="android:textColor">@color/text_color</item>
     </style>
+
+    <style name="Theme.VasylDvorak_HW_Android_Java_2.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.VasylDvorak_HW_Android_Java_2.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.VasylDvorak_HW_Android_Java_2.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
 </resources>

@@ -9,9 +9,8 @@
 
     <ImageView
         android:id="@+id/image"
-        android:layout_width="@dimen/image_size_landscape"
+        android:layout_width="743dp"
         android:layout_height="match_parent"
-        android:contentDescription="@string/image_bater"
         android:scaleType="centerCrop"
         android:src="@drawable/back_ground" />
 
@@ -19,32 +18,5 @@
         layout="@layout/buttons_loyout_landscape"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center|top"
-        android:layout_margin="@dimen/result_size" />
-
-    <RadioGroup
-        android:id="@+id/radioButtons"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end">
-
-        <com.google.android.material.radiobutton.MaterialRadioButton
-            android:id="@+id/radioButtonMaterialComponentsMyStyle"
-            style="@style/RadioStyle"
-            android:layout_width="@dimen/radio_button_width"
-            android:text="@string/my_style" />
-
-        <com.google.android.material.radiobutton.MaterialRadioButton
-            android:id="@+id/radioButtonMaterialComponentsDark"
-            style="@style/RadioStyle"
-            android:layout_width="wrap_content"
-            android:text="@string/dark_theme" />
-
-        <com.google.android.material.radiobutton.MaterialRadioButton
-            android:id="@+id/radioButtonMaterialComponentsLight"
-            style="@style/RadioStyle"
-            android:layout_width="wrap_content"
-            android:text="@string/light_theme" />
-    </RadioGroup>
-
+        android:layout_gravity="end" />
 </FrameLayout>

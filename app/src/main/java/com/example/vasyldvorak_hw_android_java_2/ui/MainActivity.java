@@ -1,48 +1,52 @@
 package com.example.vasyldvorak_hw_android_java_2.ui;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.SharedPreferences;
+import android.app.Activity;
+import android.content.Intent;
 import android.content.res.Configuration;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.RadioGroup;
 import android.widget.TextView;
-
 import com.example.vasyldvorak_hw_android_java_2.R;
 import com.example.vasyldvorak_hw_android_java_2.model.CalculatorImpl;
 import com.example.vasyldvorak_hw_android_java_2.model.Operator;
-import com.google.android.material.radiobutton.MaterialRadioButton;
-
+import com.example.vasyldvorak_hw_android_java_2.model.Theme;
+import com.example.vasyldvorak_hw_android_java_2.model.ThemeRepository;
+import com.example.vasyldvorak_hw_android_java_2.model.ThemeRepositoryImpl;
 import java.util.HashMap;
 import java.util.Map;
 
 public class MainActivity extends AppCompatActivity implements CalculatorView {
     private TextView resultTxt;
     private CalculatorPresenter presenter;
-    private static final String NameSharedPreference = "LOGIN";
-    private static final String appTheme = "APP_THEME";
-    private static final int MyStyleCodeStyle = 0;
-    private static final int AppThemeLightCodeStyle = 1;
-    private static final int AppThemeDarkCodeStyle = 2;
+    private ThemeRepository themeRepository;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setTheme(getAppTheme(R.style.MyStyle));
-
+        themeRepository= ThemeRepositoryImpl.getInstance(this);
+        setTheme(themeRepository.getSavedTheme().getThemeRes());
 
         if (getScreenOrientation())
             setContentView(R.layout.activity_main);
         else
             setContentView(R.layout.activity_main_landscape);
-        initThemeChooser();
-
 
         resultTxt = findViewById(R.id.result);
-
         presenter = new CalculatorPresenter(this, new CalculatorImpl());
+        if(getIntent().hasExtra("first_argument")){
+            presenter.argOne = getIntent().getFloatExtra("first_argument",0);
+            showResult(String.valueOf(presenter.argOne));
+            presenter.next = false;
+           presenter.dot = true;
+            presenter.dotn = true;
+        }
         if (savedInstanceState != null) {
 
             savedInstanceState.getParcelable("Pres");
@@ -50,8 +54,6 @@ public class MainActivity extends AppCompatActivity implements CalculatorView {
             presenter.argOne = savedInstanceState.getFloat("Argument_1");
             presenter.argTwo = savedInstanceState.getFloat("Argument_2");
         }
-
-
         Map<Integer, Integer> digits = new HashMap<>();
         digits.put(R.id.key_1, 1);
         digits.put(R.id.key_2, 2);
@@ -63,17 +65,13 @@ public class MainActivity extends AppCompatActivity implements CalculatorView {
         digits.put(R.id.key_8, 8);
         digits.put(R.id.key_9, 9);
         digits.put(R.id.key_0, 0);
-
         View.OnClickListener digitalClickLisener = new View.OnClickListener() {
-
             @Override
             public void onClick(View view) {
 
                 presenter.onDigitPressed(digits.get(view.getId()));
             }
         };
-
-
         findViewById(R.id.key_1).setOnClickListener(digitalClickLisener);
         findViewById(R.id.key_2).setOnClickListener(digitalClickLisener);
         findViewById(R.id.key_3).setOnClickListener(digitalClickLisener);
@@ -98,6 +96,26 @@ public class MainActivity extends AppCompatActivity implements CalculatorView {
                 presenter.onOperatorPressed(operators.get(view.getId()));
             }
         };
+
+        ActivityResultLauncher<Intent> themeLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
+            @Override
+            public void onActivityResult(ActivityResult result) {
+                if (result.getResultCode() == Activity.RESULT_OK) {
+                    Intent intent = result.getData();
+                    Theme selectedTheme = (Theme) intent.getSerializableExtra(SelectThemeActivity.EXTRA_THEME);
+                    themeRepository.saveTheme(selectedTheme);
+                    recreate();
+                }
+            }
+        });
+        findViewById(R.id.theme).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, SelectThemeActivity.class);
+                intent.putExtra(SelectThemeActivity.EXTRA_THEME, themeRepository.getSavedTheme());
+                themeLauncher.launch(intent);
+            }
+        });
 
         findViewById(R.id.key_DIV).setOnClickListener(operatorsClickListener);
         findViewById(R.id.key_minus).setOnClickListener(operatorsClickListener);
@@ -143,20 +161,14 @@ public class MainActivity extends AppCompatActivity implements CalculatorView {
                 presenter.onCEPressed();
             }
         });
+        findViewById(R.id.gb).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://gb.ru"));
+                startActivity(Intent.createChooser(browserIntent, null));
+            }
+        });
     }
-
-    private void initThemeChooser() {
-        initRadioButton(findViewById((R.id.radioButtonMaterialComponentsMyStyle)), MyStyleCodeStyle);
-        initRadioButton(findViewById((R.id.radioButtonMaterialComponentsLight)), AppThemeLightCodeStyle);
-        initRadioButton(findViewById((R.id.radioButtonMaterialComponentsDark)), AppThemeDarkCodeStyle);
-
-        RadioGroup rd = findViewById(R.id.radioButtons);
-        ((MaterialRadioButton) rd.getChildAt(getCodeStyle(MyStyleCodeStyle))).setChecked(true);}
-
-    private int getCodeStyle(int codeStyle) {
-        SharedPreferences sharesPref = getSharedPreferences(NameSharedPreference, MODE_PRIVATE);
-        return sharesPref.getInt(appTheme, codeStyle);}
-
 
     @Override
     public void showResult(String result) {
@@ -171,7 +183,6 @@ public class MainActivity extends AppCompatActivity implements CalculatorView {
             return false;
     }
 
-
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         outState.putString("TextView", (String) resultTxt.getText());
@@ -179,39 +190,5 @@ public class MainActivity extends AppCompatActivity implements CalculatorView {
         outState.putFloat("Argument_1", presenter.argOne);
         outState.putFloat("Argument_2", presenter.argTwo);
         super.onSaveInstanceState(outState);
-    }
-
-    private int getAppTheme(int codeStyle) {
-        return codeStyleToStyleId((getCodeStyle(codeStyle)));
-    }
-
-    private int codeStyleToStyleId(int codeStyle) {
-        switch (codeStyle) {
-            case MyStyleCodeStyle:
-                return R.style.MyStyle;
-            case AppThemeLightCodeStyle:
-                return R.style.AppThemeLight;
-            case AppThemeDarkCodeStyle:
-                return R.style.AppThemeDark;
-            default:
-                return R.style.MyStyle;
-        }
-    }
-
-    private void initRadioButton(View button, final int codeStyle) {
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                setAppTheme(codeStyle);
-                recreate();
-            }
-        });
-    }
-
-    private void setAppTheme(int codeStyle) {
-        SharedPreferences sharedPref = getSharedPreferences(NameSharedPreference, MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putInt(appTheme, codeStyle);
-        editor.apply();
     }
 }
