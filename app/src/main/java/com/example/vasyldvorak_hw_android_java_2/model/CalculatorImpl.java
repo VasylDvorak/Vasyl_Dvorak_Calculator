@@ -1,7 +1,5 @@
 package com.example.vasyldvorak_hw_android_java_2.model;
 
-import com.example.vasyldvorak_hw_android_java_2.ui.CalculatorPresenter;
-
 public class CalculatorImpl implements Calculator {
 
     @Override
