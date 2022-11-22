@@ -1,3 +1,27 @@
 <resources>
     <string name="app_name">VasylDvorak_HW_Android_Java_2</string>
+    <string name="key_CE">CE</string>
+    <string name="key_C">C</string>
+    <string name="key_del">DEL</string>
+    <string name="key_dev">/</string>
+    <string name="key_1">1</string>
+    <string name="key_2">2</string>
+    <string name="key_3">3</string>
+    <string name="key_x">*</string>
+    <string name="key_4">4</string>
+    <string name="key_5">5</string>
+    <string name="key_6">6</string>
+    <string name="key_minus">-</string>
+    <string name="key_7">7</string>
+    <string name="key_8">8</string>
+    <string name="key_9">9</string>
+    <string name="key_sign">+/-</string>
+    <string name="key_plus">+</string>
+    <string name="key_0">0</string>
+    <string name="key_dot">.</string>
+    <string name="key_equal">=</string>
+    <string name="image_bater">TODO</string>
+    <string name="dark_theme" translatable="false">dark theme</string>
+    <string name="light_theme" translatable="false">light_theme</string>
+    <string name="my_style" translatable="false">My style</string>
 </resources>

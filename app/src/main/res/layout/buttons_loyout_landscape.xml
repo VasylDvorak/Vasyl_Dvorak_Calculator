@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/gridLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:columnCount="5"
+    android:padding="@dimen/Grid_padding"
+    android:theme="@style/StyleButt"
+    android:useDefaultMargins="true">
+
+    <TextView
+        android:id="@+id/result"
+        android:layout_width="@dimen/text_width_2"
+        android:layout_columnSpan="5"
+        android:background="@color/color_3"
+        android:backgroundTint="@color/color_text_2"
+        android:gravity="end"
+        android:textSize="@dimen/result_size" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/key_CE"
+        android:background="@drawable/oval_button"
+        android:text="@string/key_CE" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/key_C"
+        android:background="@drawable/oval_button"
+        android:text="@string/key_C" />
+
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/key_DEL"
+        android:background="@drawable/oval_button"
+        android:text="@string/key_del" />
+
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/key_DIV"
+        android:background="@drawable/oval_button"
+        android:text="@string/key_dev" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/key_mult"
+        android:background="@drawable/oval_button"
+        android:text="@string/key_x" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/key_1"
+        android:background="@drawable/oval_button"
+        android:text="@string/key_1" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/key_2"
+        android:background="@drawable/oval_button"
+        android:text="@string/key_2" />
+
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/key_3"
+        android:background="@drawable/oval_button"
+        android:text="@string/key_3" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/key_4"
+        android:background="@drawable/oval_button"
+        android:text="@string/key_4" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/key_minus"
+        android:background="@drawable/oval_button"
+        android:text="@string/key_minus" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/key_5"
+        android:background="@drawable/oval_button"
+        android:text="@string/key_5" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/key_6"
+        android:background="@drawable/oval_button"
+        android:text="@string/key_6" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/key_7"
+        android:background="@drawable/oval_button"
+        android:text="@string/key_7" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/key_8"
+        android:background="@drawable/oval_button"
+        android:text="@string/key_8" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/key_plus"
+        android:background="@drawable/oval_button"
+        android:text="@string/key_plus" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/key_9"
+        android:background="@drawable/oval_button"
+        android:text="@string/key_9" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/key_0"
+        android:background="@drawable/oval_button"
+        android:text="@string/key_0" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/key_dot"
+        android:background="@drawable/oval_button"
+        android:text="@string/key_dot" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/key_sign"
+        android:background="@drawable/oval_button"
+        android:text="@string/key_sign" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/key_equal"
+        android:background="@drawable/oval_button"
+        android:text="@string/key_equal" />
+
+</GridLayout>
