@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">VasylDvorak_HW_Android_Java_2</string>
+    <string name="app_name">Калькулятор 2022</string>
     <string name="key_CE">CE</string>
     <string name="key_C">C</string>
     <string name="key_del">DEL</string>
@@ -21,7 +21,20 @@
     <string name="key_dot">.</string>
     <string name="key_equal">=</string>
     <string name="image_bater">TODO</string>
-    <string name="dark_theme" translatable="false">dark theme</string>
-    <string name="light_theme" translatable="false">light_theme</string>
+    <string name="dark_theme" translatable="false">Light theme</string>
+    <string name="light_theme" translatable="false">Dark theme</string>
     <string name="my_style" translatable="false">My style</string>
+    <string name="MyStyle">MyStyle</string>
+    <string name="AppThemeDark">AppThemeDark</string>
+    <string name="AppThemeLight">AppThemeLight</string>
+    <string name="select_theme">Select Theme</string>
+    <string name="title_activity_main2">MainActivity2</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="go_to_geekbrains">go to GeekBrains</string>
 </resources>
